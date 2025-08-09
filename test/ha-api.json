@@ -1,0 +1,25 @@
+{
+  "entity_id": "sensor.evcharger_json",
+  "state": "26.01",
+  "attributes": {
+    "state_class": "measurement",
+    "power": 4100,
+    "energy": 15140.43,
+    "l1_v": 230,
+    "l2_v": 230,
+    "l3_v": 230,
+    "l1_i": 6,
+    "l2_i": 6,
+    "l3_i": 6,
+    "friendly_name": "evcharger_json",
+    "unit_of_measurement": "kWh"
+  },
+  "last_changed": "2025-07-08T14:27:30.210832+00:00",
+  "last_reported": "2025-07-08T14:27:30.217947+00:00",
+  "last_updated": "2025-07-08T14:27:30.217947+00:00",
+  "context": {
+    "id": "01JZN6YH859ZXMKQ7J20KRE2DM",
+    "parent_id": null,
+    "user_id": null
+  }
+}
