@@ -22,7 +22,7 @@ sys.path.insert(1, os.path.join(os.path.dirname(__file__), '/opt/victronenergy/d
 from vedbus import VeDbusService
 
 
-class DbusHAEVChargerservice:
+class DbusHAEVChargerService:
     def __init__(self, servicename, paths, productname='EV Charger', connection='HA EVCharger HTTP JSOn service'):
         config = self._getConfig()
         deviceinstance = int(config['DEFAULT']['DeviceInstance'])
@@ -143,7 +143,7 @@ class DbusHAEVChargerservice:
             self._dbusservice['/Ac/L3/Power'] = ev_data['l3_v']*ev_data['l3_i']
             self._dbusservice['/Ac/Energy/Forward'] = (ev_data['energy'])
             self._dbusservice['/Ac/Energy/Reverse'] = 0
-            self._dbusservice['/Mode'] = 0  # Manual, no control
+            #self._dbusservice['/Mode'] = 0  # Manual, no control
             
             #logging
             logging.debug("Grid Consumption (/Ac/Power): %s" % (self._dbusservice['/Ac/Power']))
@@ -211,7 +211,7 @@ def main():
         
         #start our main-service
         
-        evac_output = DbusEVChargerService(
+        evac_output = DbusHAEVChargerService(
             servicename='com.victronenergy.evcharger.ha',
             paths={
                 '/Ac/Energy/Forward': {'initial': 0, 'textformat': _kwh}, # energy bought from the grid
