@@ -143,7 +143,7 @@ class DbusHAEVChargerService:
             self._dbusservice['/Ac/L3/Power'] = ev_data['l3_v']*ev_data['l3_i']
             self._dbusservice['/Ac/Energy/Forward'] = (ev_data['energy'])
             self._dbusservice['/Ac/Energy/Reverse'] = 0
-            #self._dbusservice['/Mode'] = 0  # Manual, no control
+            self._dbusservice['/Mode'] = 0  # Manual, no control
             
             #logging
             logging.debug("Grid Consumption (/Ac/Power): %s" % (self._dbusservice['/Ac/Power']))
@@ -208,6 +208,7 @@ def main():
         _a = lambda p, v: (str(round(v, 1)) + ' A')
         _w = lambda p, v: (str(round(v, 1)) + ' W')
         _v = lambda p, v: (str(round(v, 1)) + ' V')   
+        _n = lambda p, v: (str("%i" % v ) )
         
         #start our main-service
         
@@ -228,6 +229,7 @@ def main():
                 '/Ac/L1/Power': {'initial': 0, 'textformat': _w},
                 '/Ac/L2/Power': {'initial': 0, 'textformat': _w},
                 '/Ac/L3/Power': {'initial': 0, 'textformat': _w},
+                '/Mode': {'initial': 1, "textformat": _n},
                 })
         logging.info('Connected to dbus, and switching over to gobject.MainLoop() (= event based)')
         mainloop = gobject.MainLoop()
