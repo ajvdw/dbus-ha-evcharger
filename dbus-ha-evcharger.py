@@ -139,7 +139,7 @@ class DbusHAEVChargerService:
             self._dbusservice['/Ac/Energy/Forward'] = (ev_data['energy'])
             self._dbusservice['/Mode'] = 0  # Manual, no control
             self._dbusservice['/MaxCurrent'] = 16
-            self._dbusservice['/Status'] = 2  # 0=Disconnected, 1=Connected, 2=Charging, 3=Charged, #24=Stop Charging
+            self._dbusservice['/Status'] = 1  # 0=Disconnected, 1=Connected, 2=Charging, 3=Charged, #24=Stop Charging
             #logging
             logging.debug("Grid Consumption (/Ac/Power): %s" % (self._dbusservice['/Ac/Power']))
             logging.debug("Grid Forward (/Ac/Energy/Forward): %s" % (self._dbusservice['/Ac/Energy/Forward']))
