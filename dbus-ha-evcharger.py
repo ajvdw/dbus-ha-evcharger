@@ -220,7 +220,7 @@ def main():
                 "/AutoStart": {'initial': 0, "textformat": _n},
                 "/ChargingTime": {'initial': None, "textformat": _n},                
                 '/Mode': {'initial': 1, "textformat": _n},
-                "/Status": {'initial': None, "textformat": _n},
+                "/Status": {'initial': 0, "textformat": _n},
                 })
         logging.info('Connected to dbus, and switching over to gobject.MainLoop() (= event based)')
         mainloop = gobject.MainLoop()
