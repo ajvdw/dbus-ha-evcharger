@@ -21,6 +21,7 @@ import configparser # for config/ini file
 sys.path.insert(1, os.path.join(os.path.dirname(__file__), '/opt/victronenergy/dbus-systemcalc-py/ext/velib_python'))
 from vedbus import VeDbusService
 
+STOP_CHARGING_COUNTER_AFTER = 300  # seconds
 
 class DbusHAEVChargerService:
     def __init__(self, servicename, paths, productname='EV Charger', connection='HA EVCharger HTTP JSON Service'):
@@ -59,6 +60,8 @@ class DbusHAEVChargerService:
     
         # last update
         self._lastUpdate = 0
+        self._charging_time = {"start": None, "calculate": False, "stopped_since": 0}
+        self._energy_start = 0
     
         # add _update function 'timer'
         gobject.timeout_add(5000 , self._update) # pause 500ms before the next request
