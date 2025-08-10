@@ -128,7 +128,7 @@ class DbusHAEVChargerService:
  
     def _update(self):   
         try:
-            now = int(time())
+            now = int(time.time())
             #get data from EVCharger
 
             ev_data = self._getData()
