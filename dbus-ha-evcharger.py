@@ -132,23 +132,16 @@ class DbusHAEVChargerService:
 
             #send data to DBus for 3phase system
             self._dbusservice['/Ac/Power'] = ev_data['power']
-            self._dbusservice['/Ac/L1/Voltage'] = ev_data['l1_v']
-            self._dbusservice['/Ac/L2/Voltage'] = ev_data['l2_v']
-            self._dbusservice['/Ac/L3/Voltage'] = ev_data['l3_v']
-            self._dbusservice['/Ac/L1/Current'] = ev_data['l1_i']
-            self._dbusservice['/Ac/L2/Current'] = ev_data['l2_i']
-            self._dbusservice['/Ac/L3/Current'] = ev_data['l3_i']
+            self._dbusservice['/Current'] = ev_data['l1_i']
             self._dbusservice['/Ac/L1/Power'] = ev_data['l1_v']*ev_data['l1_i']
             self._dbusservice['/Ac/L2/Power'] = ev_data['l2_v']*ev_data['l2_i']
             self._dbusservice['/Ac/L3/Power'] = ev_data['l3_v']*ev_data['l3_i']
             self._dbusservice['/Ac/Energy/Forward'] = (ev_data['energy'])
-            self._dbusservice['/Ac/Energy/Reverse'] = 0
             self._dbusservice['/Mode'] = 0  # Manual, no control
             
             #logging
             logging.debug("Grid Consumption (/Ac/Power): %s" % (self._dbusservice['/Ac/Power']))
             logging.debug("Grid Forward (/Ac/Energy/Forward): %s" % (self._dbusservice['/Ac/Energy/Forward']))
-            logging.debug("Grid Reverse (/Ac/Energy/Reverse): %s" % (self._dbusservice['/Ac/Energy/Reverse']))
             logging.debug("---");
             
             # increment UpdateIndex - to show that new data is available an wrap
@@ -216,19 +209,16 @@ def main():
             servicename='com.victronenergy.evcharger.ha',
             paths={
                 '/Ac/Energy/Forward': {'initial': 0, 'textformat': _kwh}, # energy bought from the grid
-                '/Ac/Energy/Reverse': {'initial': 0, 'textformat': _kwh}, # energy sold to the grid
                 '/Ac/Power': {'initial': 0, 'textformat': _w},            
                 '/Ac/Current': {'initial': 0, 'textformat': _a},
-                '/Ac/Voltage': {'initial': 0, 'textformat': _v},
-                '/Ac/L1/Voltage': {'initial': 0, 'textformat': _v},
-                '/Ac/L2/Voltage': {'initial': 0, 'textformat': _v},
-                '/Ac/L3/Voltage': {'initial': 0, 'textformat': _v},
-                '/Ac/L1/Current': {'initial': 0, 'textformat': _a},
-                '/Ac/L2/Current': {'initial': 0, 'textformat': _a},
-                '/Ac/L3/Current': {'initial': 0, 'textformat': _a},
                 '/Ac/L1/Power': {'initial': 0, 'textformat': _w},
                 '/Ac/L2/Power': {'initial': 0, 'textformat': _w},
                 '/Ac/L3/Power': {'initial': 0, 'textformat': _w},
+                "/Current": {'initial': None, "textformat": _a},
+                "/MaxCurrent": {'initial': None, "textformat": _a},
+                "/SetCurrent": {'initial': None, "textformat": _a},
+                "/AutoStart": {'initial': 0, "textformat": _n},
+                "/ChargingTime": {'initial': None, "textformat": _n},                
                 '/Mode': {'initial': 1, "textformat": _n},
                 })
         logging.info('Connected to dbus, and switching over to gobject.MainLoop() (= event based)')
