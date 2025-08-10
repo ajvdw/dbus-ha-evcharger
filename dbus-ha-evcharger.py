@@ -128,6 +128,7 @@ class DbusHAEVChargerService:
  
     def _update(self):   
         try:
+            now = int(time())
             #get data from EVCharger
 
             ev_data = self._getData()
@@ -139,10 +140,32 @@ class DbusHAEVChargerService:
             self._dbusservice['/Ac/L1/Power'] = ev_data['l1_v']*ev_data['l1_i']
             self._dbusservice['/Ac/L2/Power'] = ev_data['l2_v']*ev_data['l2_i']
             self._dbusservice['/Ac/L3/Power'] = ev_data['l3_v']*ev_data['l3_i']
-            self._dbusservice['/Ac/Energy/Forward'] = (ev_data['energy'])
             self._dbusservice['/Mode'] = 0  # Manual, no control
             self._dbusservice['/MaxCurrent'] = 16
             self._dbusservice['/Status'] = 1  # 0=Disconnected, 1=Connected, 2=Charging, 3=Charged, #24=Stop Charging
+
+
+            # set charging time start
+            if self._charging_time["start"] is None and ev_data['power'] > 0:
+                self._charging_time["start"] = now
+                self._energy_start = (ev_data['energy'])
+
+            # calculate charging time if charging started
+            if self._charging_time["start"] is not None:
+                self._dbusservice['/ChargingTime'] = now - charging_time["start"]
+
+                if ev_data['power'] == 0 and charging_time["stopped_since"] is None:
+                    self._charging_time["stopped_since"] = now
+                elif ev_data['power'] > 0 and charging_time["stopped_since"] is not None:
+                    self._charging_time["stopped_since"] = None
+
+                if self._charging_time["stopped_since"] is not None and STOP_CHARGING_COUNTER_AFTER < now - charging_time["stopped_since"]:
+                    self._charging_time["start"] = None
+                    self._charging_time["stopped_since"] = None
+                    self._dbusservice['/ChargingTime']= None
+
+            self._dbusservice['/Ac/Energy/Forward'] = (ev_data['energy']) - self._energy_start
+
             #logging
             logging.debug("Grid Consumption (/Ac/Power): %s" % (self._dbusservice['/Ac/Power']))
             logging.debug("Grid Forward (/Ac/Energy/Forward): %s" % (self._dbusservice['/Ac/Energy/Forward']))
