@@ -47,7 +47,7 @@ class DbusHAEVChargerService:
         self._dbusservice.add_path('/HardwareVersion', 0)
         self._dbusservice.add_path('/Connected', 1)
         self._dbusservice.add_path('/Role', 'evcharger')
-        self._dbusservice.add_path('/Position', 0) 
+        self._dbusservice.add_path('/Position', 1) 
         self._dbusservice.add_path('/Serial', self._getSerial())
         self._dbusservice.add_path('/UpdateIndex', 0)
         #self._dbusservice.add_path('/IsGenericEnergyMeter', 1)
