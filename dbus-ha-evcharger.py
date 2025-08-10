@@ -13,7 +13,7 @@ if sys.version_info.major == 2:
 else:
     from gi.repository import GLib as gobject
 import sys
-from time import sleep, time
+from time import time
 import requests # for http GET
 import configparser # for config/ini file
  
@@ -128,7 +128,7 @@ class DbusHAEVChargerService:
  
     def _update(self):   
         try:
-            now = int(time.time())
+            now = int( time() )
             #get data from EVCharger
 
             ev_data = self._getData()
