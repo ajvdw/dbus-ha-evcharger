@@ -168,7 +168,7 @@ class DbusHAEVChargerService:
             
             if self._energy_start > 0:
                 self._dbusservice['/Ac/Energy/Forward'] = (ev_data['energy']) - self._energy_start
-            else
+            else:
                 self._dbusservice['/Ac/Energy/Forward'] = 0
                 
             #logging
