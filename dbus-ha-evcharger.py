@@ -23,7 +23,7 @@ from vedbus import VeDbusService
 
 
 class DbusHAEVChargerService:
-    def __init__(self, servicename, paths, productname='EV Charger', connection='HA EVCharger HTTP JSOn service'):
+    def __init__(self, servicename, paths, productname='EV Charger', connection='HA EVCharger HTTP JSON Service'):
         config = self._getConfig()
         deviceinstance = int(config['DEFAULT']['DeviceInstance'])
         customname = config['DEFAULT']['CustomName']
@@ -50,7 +50,7 @@ class DbusHAEVChargerService:
         self._dbusservice.add_path('/Position', 0) 
         self._dbusservice.add_path('/Serial', self._getSerial())
         self._dbusservice.add_path('/UpdateIndex', 0)
-        self._dbusservice.add_path('/IsGenericEnergyMeter', 1)
+        #self._dbusservice.add_path('/IsGenericEnergyMeter', 1)
         
         # add path values to dbus
         for path, settings in self._paths.items():
@@ -222,6 +222,7 @@ def main():
                 "/ChargingTime": {'initial': None, "textformat": _n},                
                 '/Mode': {'initial': 1, "textformat": _n},
                 "/Status": {'initial': 1, "textformat": _n},
+                "/StartStop": {'initial': 1, "textformat": _n},
                 })
         logging.info('Connected to dbus, and switching over to gobject.MainLoop() (= event based)')
         mainloop = gobject.MainLoop()
