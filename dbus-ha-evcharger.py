@@ -13,7 +13,7 @@ if sys.version_info.major == 2:
 else:
     from gi.repository import GLib as gobject
 import sys
-import time
+from time import sleep, time
 import requests # for http GET
 import configparser # for config/ini file
  
