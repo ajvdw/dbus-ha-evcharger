@@ -50,7 +50,7 @@ class DbusHAEVChargerService:
         self._dbusservice.add_path('/Position', 0) 
         self._dbusservice.add_path('/Serial', self._getSerial())
         self._dbusservice.add_path('/UpdateIndex', 0)
-        self._dbusservice.add_path('/IsGenericEnergyMeter', 0)
+        self._dbusservice.add_path('/IsGenericEnergyMeter', 1)
         
         # add path values to dbus
         for path, settings in self._paths.items():
