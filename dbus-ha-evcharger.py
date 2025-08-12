@@ -1,18 +1,15 @@
 #!/usr/bin/env python
-# vim: ts=2 sw=2 et
 
 # import normal packages
 import platform 
 import logging
 import logging.handlers
-import sys
 import os
 import sys
 if sys.version_info.major == 2:
     import gobject
 else:
     from gi.repository import GLib as gobject
-import sys
 import time
 import requests # for http GET
 import configparser # for config/ini file
