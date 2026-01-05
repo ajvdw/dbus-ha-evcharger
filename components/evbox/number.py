@@ -19,7 +19,7 @@ CONFIG_SCHEMA = number.NUMBER_SCHEMA.extend(
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
-    await number.register_number(var, config, min_value=9, max_value=32, step=1)
+    await number.register_number(var, config, min_value=0, max_value=32, step=1)
 
     parent = await cg.get_variable(config[CONF_EVBOX_ID])
     cg.add(var.set_evbox_parent(parent))
