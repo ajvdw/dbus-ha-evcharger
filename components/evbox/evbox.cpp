@@ -15,6 +15,8 @@ namespace evbox {
 static const char *const TAG = "evbox";
 
 void EVBox::setup() {
+  ESP_LOGD(TAG, "evbox.setup()");
+
   ESP_LOGCONFIG(TAG, "Setting up EVBox...");
   
   if (this->flow_control_pin_ != nullptr) {
