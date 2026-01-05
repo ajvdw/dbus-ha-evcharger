@@ -1,0 +1,104 @@
+esphome:
+  name: evbox-charger
+
+external_components:
+  - source: github://ajvdw/dbus-ha-evcharger@main
+    components: [ evbox ]
+    refresh: 0s
+
+esp8266:
+  restore_from_flash: true
+  board: d1_mini
+
+api:
+
+# Enable logging
+logger:
+  level: DEBUG
+
+# Enable web server for HTTP endpoints
+web_server:
+  port: 80
+  version: 2
+  include_internal: true
+  
+uart:
+  id: uart_bus
+  rx_pin: GPIO12 
+  tx_pin: GPIO14
+  baud_rate: 38400
+
+evbox:
+  id: my_evbox
+  uart_id: uart_bus
+  flow_control_pin: GPIO13
+
+# Configure sensors
+sensor:
+  - platform: evbox
+    evbox_id: my_evbox
+    l1_current:
+      name: "L1 Current"
+      id: l1_current
+    l2_current:
+      name: "L2 Current"
+      id: l2_current
+    l3_current:
+      name: "L3 Current"
+      id: l3_current
+    total_energy:
+      name: "Total Energy"
+      id: total_energy
+
+# Custom text sensor with combined JSON
+text_sensor:
+  - platform: template
+    name: "EVBox Status JSON"
+    id: evbox_status_json
+    internal: true
+    lambda: |-
+      id(my_evbox).set_current(id(charging_current).state);
+      char buffer[256];
+      snprintf(buffer, sizeof(buffer), 
+               "{\"l1_current\": %.1f, \"l2_current\": %.1f, \"l3_current\": %.1f, \"total_energy\": %.3f}",
+               id(l1_current).state,
+               id(l2_current).state,
+               id(l3_current).state,
+               id(total_energy).state);
+      return {buffer};
+    update_interval: 5s
+
+# Number component to set current
+number:
+  - platform: template
+    name: "Charging Current"
+    id: charging_current
+    min_value: 0
+    max_value: 16
+    step: 1
+    unit_of_measurement: "A"
+    mode: slider
+    optimistic: true
+    restore_value: true
+    set_action:
+      then:
+        - lambda: |-
+            id(my_evbox)->set_current(x);
+
+button:
+  - platform: restart
+    name: "ESP EVBox Restart"
+
+#Allow over-the-air updates 
+ota:
+  id: ota_id
+  password: !secret ota_password
+  platform: esphome
+
+#Wifi settings
+wifi:
+  min_auth_mode: WPA2
+  ssid: !secret wifi_ssid 
+  password: !secret wifi_password 
+  use_address: !secret ip_laadpunt
+  
