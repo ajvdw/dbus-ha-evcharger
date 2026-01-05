@@ -89,13 +89,13 @@ button:
   - platform: restart
     name: "ESP EVBox Restart"
 
-#Allow over-the-air updates 
+# Allow over-the-air updates 
 ota:
   id: ota_id
   password: !secret ota_password
   platform: esphome
 
-#Wifi settings
+# Wifi settings
 wifi:
   min_auth_mode: WPA2
   ssid: !secret wifi_ssid 
