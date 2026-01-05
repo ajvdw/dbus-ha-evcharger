@@ -51,9 +51,6 @@ class EVBox : public uart::UARTDevice, public Component {
   uint8_t received_len_{0};
   uint8_t received_data_[MAX_MESSAGE_LENGTH + 1];
   
-  // Total energy value
-  uint32_t total_energy_{0};
-  
   // Hex lookup table
   static constexpr char HEX_CHARS[16] = {'0', '1', '2', '3', '4', '5', '6', '7',
                                           '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
