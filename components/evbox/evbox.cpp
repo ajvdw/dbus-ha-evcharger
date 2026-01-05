@@ -120,6 +120,13 @@ void EVBox::set_current(float amp) {
   // MaxChargingCurrent command, timeout=60s, current after timeout 6A
   char buf[35] = "80A06900__00__00__003C003C003C003C";
   uint16_t current_value = static_cast<uint16_t>(std::round(amp * 10.0f));
+
+  if( current_value < 60 ) {
+    if( current_value ) 
+      current_value = 60; // Minimal charging value
+    else 
+      current_value = 0; // Charging off
+  }
   
   // Set current values (fill in the blanks)
   buf[8] = buf[12] = buf[16] = HEX_CHARS[(current_value >> 4) & 0x0F];
