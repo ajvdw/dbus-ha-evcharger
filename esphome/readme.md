@@ -38,7 +38,7 @@ This is a custom ESPHome component for controlling and monitoring EVBox EV charg
 ## API Endpoints
 ```bash
 Set Charging Current
-curl http://device-ip/number/evbox_status_json](http://device-ip/number/charging_current/set?value=16
+curl http://device-ip/number/charging_current/set?value=16
 
 Get Status (JSON)
 curl http://device-ip/text_sensor/evbox_status_json
