@@ -84,7 +84,7 @@ void EVBox::process_message_(char *msg) {
   char meter[9];
   strncpy(meter, &msg[44], 8);
   meter[8] = '\0';
-  this->total_energy_ = strtoul(meter, nullptr, 16);
+  this->total_energy_ = strtoul(meter, nullptr, 16) / 1000;
   
   if (this->total_energy_sensor_ != nullptr) {
     this->total_energy_sensor_->publish_state(this->total_energy_);
