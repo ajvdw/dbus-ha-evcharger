@@ -36,13 +36,10 @@ This is a custom ESPHome component for controlling and monitoring EVBox EV charg
 - RS485 A/B: Connect to EVBox charger RS485 terminals
 
 ## API Endpoints
-
-### Set Charging Current
 ```bash
-# Via Home Assistant
-service: esphome.my_device_set_evbox_current
-data:
-  current: 16.0
+Set Charging Current
+curl http://device-ip/number/evbox_status_json](http://device-ip/number/charging_current/set?value=16
+
 Get Status (JSON)
 curl http://device-ip/text_sensor/evbox_status_json
 curl http://device-ip/sensors
