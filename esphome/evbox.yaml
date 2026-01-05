@@ -1,7 +1,19 @@
 esphome:
-  name: my_device
+  name: test_evbox
   includes:
     - evbox.h
+
+esp8266:
+  restore_from_flash: true
+  board: d1_mini
+
+external_components:
+  #use from main branch in GitHub
+  - source: "github://ajvdw/evbox"
+    components: [evbox]
+    refresh: 0s
+
+
 
 # Enable API
 api:
