@@ -46,5 +46,6 @@ data:
 Get Status (JSON)
 curl http://device-ip/text_sensor/evbox_status_json
 curl http://device-ip/sensors
-License
+
+##License
 This component is provided as-is for use with EVBox chargers.
