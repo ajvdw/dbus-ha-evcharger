@@ -87,8 +87,8 @@ void EVBox::process_message_(char *msg) {
 
   
   if (this->total_energy_sensor_ != nullptr) {
-    this->total_energy_ = 0.001f * strtoul(meter, nullptr, 16);
-    this->total_energy_sensor_->publish_state(this->total_energy_);
+    float total_energy = 0.001f * strtoul(meter, nullptr, 16);
+    this->total_energy_sensor_->publish_state(total_energy);
   }
   
   // Read phase currents
