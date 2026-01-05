@@ -1,4 +1,4 @@
-# EVBox Component for ESPHome
+# EVBox Component for ESPHome (Work In Progress)
 
 Author: A.J. van de Werken  
 GitHub: ajvdw
