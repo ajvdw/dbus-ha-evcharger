@@ -26,7 +26,6 @@ void EVBox::setup() {
 void EVBox::dump_config() {
   ESP_LOGCONFIG(TAG, "EVBox");
   LOG_PIN("  Flow Control Pin: ", this->flow_control_pin_);
-  LOG_UART(this);
 }
 
 void EVBox::loop() {
