@@ -87,7 +87,6 @@ void EVBox::process_message_(char *msg) {
   // Read MID metered values from EVSE
   char meter[9];
   meter[8] = '\0';
-
   
   if (this->total_energy_sensor_ != nullptr) {
     strncpy(meter, &msg[44], 8);
