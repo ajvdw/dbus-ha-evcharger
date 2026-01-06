@@ -84,11 +84,11 @@ void EVBox::process_message_(char *msg) {
   
   // Read MID metered values from EVSE
   char meter[9];
-  strncpy(meter, &msg[44], 8);
   meter[8] = '\0';
 
   
   if (this->total_energy_sensor_ != nullptr) {
+    strncpy(meter, &msg[44], 8);
     float total_energy = 0.001f * strtoul(meter, nullptr, 16);
     this->total_energy_sensor_->publish_state(total_energy);
   }
@@ -97,20 +97,20 @@ void EVBox::process_message_(char *msg) {
   char current[5];
   current[4] = '\0';
   
-  strncpy(current, &msg[20], 4);
   if (this->l1_current_sensor_ != nullptr) {
+    strncpy(current, &msg[20], 4);
     float l1_current = 0.1f * strtoul(current, nullptr, 16);
     this->l1_current_sensor_->publish_state(l1_current);
   }
   
-  strncpy(current, &msg[24], 4);
   if (this->l2_current_sensor_ != nullptr) {
+    strncpy(current, &msg[24], 4);
     float l2_current = 0.1f * strtoul(current, nullptr, 16);
     this->l2_current_sensor_->publish_state(l2_current);
   }
   
-  strncpy(current, &msg[28], 4);
   if (this->l3_current_sensor_ != nullptr) {
+    strncpy(current, &msg[28], 4);
     float l3_current = 0.1f * strtoul(current, nullptr, 16);
     this->l3_current_sensor_->publish_state(l3_current);
   }
