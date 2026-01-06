@@ -23,7 +23,8 @@ static const size_t MAX_MESSAGE_LENGTH = 255;
 class EVBox : public uart::UARTDevice, public Component {
  public:
   void setup() override;
-  void loop() override;
+  void loop() override; 
+  void dump_config() override;
   
   // Set charging current in amps
   void set_current(float amp);
