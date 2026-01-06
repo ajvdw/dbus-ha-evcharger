@@ -117,7 +117,7 @@ void EVBox::process_message_(char *msg) {
 }
 
 void EVBox::set_current(float amp) {
-  // MaxChargingCurrent command, timeout=60s, current after timeout 6A
+  // MaxChargingCurrent command, minimal current 6 A. To stop charging use 0 A.
   char buf[35] = "80A06900__00__00__003C003C003C003C";
   uint16_t current_value;
 
