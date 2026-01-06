@@ -1,4 +1,4 @@
-# EVBox Component for ESPHome (Work In Progress)
+# EVBox Component for ESPHome
 
 Author: A.J. van de Werken  
 GitHub: ajvdw
@@ -11,16 +11,15 @@ This is a custom ESPHome component for controlling and monitoring EVBox EV charg
 
 - Read L1, L2, L3 phase currents
 - Read total energy consumption
-- Set charging current (6-32A)
+- Set charging current (0, 6-32A)
 - RS485 communication with flow control
-- JSON API endpoints
+- API endpoints
 - Home Assistant integration
 
 ## Installation
 
-1. Copy `evbox.h` and `evbox.cpp` to your ESPHome configuration directory
-2. Use the `evbox.yaml` as a template for your configuration
-3. Adjust GPIO pins for your hardware setup
+1. Use the `evbox.yaml` as a template for your configuration
+2. Adjust GPIO pins for your hardware setup
 
 ## Hardware Requirements
 
@@ -36,7 +35,7 @@ This is a custom ESPHome component for controlling and monitoring EVBox EV charg
 - RS485 A/B: Connect to EVBox charger RS485 terminals
 
 ## API Endpoints
-```bash
+```
 Set Charging Current
 curl http://device-ip/number/charging_current/set?value=16
 
