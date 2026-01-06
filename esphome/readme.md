@@ -1,10 +1,5 @@
 # EVBox Component for ESPHome
 
-Author: A.J. van de Werken  
-GitHub: ajvdw
-
-## Description
-
 This is a custom ESPHome component for controlling and monitoring EVBox EV chargers via RS485 communication.
 
 ## Features
