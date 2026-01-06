@@ -15,15 +15,18 @@ namespace evbox {
 static const char *const TAG = "evbox";
 
 void EVBox::setup() {
-  ESP_LOGD(TAG, "evbox.setup()");
+  ESP_LOGD(TAG, "Setting up EVBox..");
 
-  ESP_LOGCONFIG(TAG, "Setting up EVBox...");
-  
   if (this->flow_control_pin_ != nullptr) {
     this->flow_control_pin_->setup();
     this->flow_control_pin_->digital_write(false);  // Set to receive mode
-    ESP_LOGCONFIG(TAG, "  Flow control pin configured");
   }
+}
+
+void EVBox::dump_config() {
+  ESP_LOGCONFIG(TAG, "EVBox");
+  LOG_PIN("  Flow Control Pin: ", this->flow_control_pin_);
+  LOG_UART(this);
 }
 
 void EVBox::loop() {
