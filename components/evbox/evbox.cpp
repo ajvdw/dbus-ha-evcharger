@@ -121,6 +121,13 @@ void EVBox::set_current(float amp) {
   // MaxChargingCurrent command, minimal current 6 A. To stop charging use 0 A.
   char buf[35] = "80A06900__00__00__003C003C003C003C";
   uint16_t current_value;
+  static uint32_t last_time = 0;
+
+  // The hardware fails if messages are sent to fast
+  if( millis() - last_time < 5000 )
+    return;
+  
+  last_time = millis();
 
   if( amp > 32.0 ) amp = 32.0; // maximum charging current
   if( amp != 0.0 && amp < 6.0 ) amp = 6.0; // minimum charging current
