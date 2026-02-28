@@ -125,7 +125,7 @@ void EVBox::set_current(float amp) {
   if( amp > 32.0 ) amp = 32.0; // maximum charging current
   if( amp != 0.0 && amp < 6.0 ) amp = 6.0; // minimum charging current
   
-  current_value = static_cast<uint16_t>(std::round(amp * 10.0f));
+  current_value = static_cast<uint16_t>(std::round(amp) * 10.0f);
 
   // Set current values (fill in the blanks)
   buf[8] = buf[12] = buf[16] = HEX_CHARS[(current_value >> 4) & 0x0F];
